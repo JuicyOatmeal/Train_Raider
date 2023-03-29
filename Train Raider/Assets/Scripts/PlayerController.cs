@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 1; 
+    public float speed = 1;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +16,20 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float forwardInput = Input.GetAxis("Vertical");
+        transform.Translate(forwardInput * Vector3.forward * Time.deltaTime * -speed);
+        RotatePlayer();
+    }
+
+    void RotatePlayer()
+    {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            transform.Rotate(0, 180, 0);
+            player.transform.eulerAngles = new Vector3(0, 270, 0);
         }
-        transform.Translate(0, 0, (forwardInput * Time.deltaTime * -speed));
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            player.transform.eulerAngles = new Vector3(0, 90, 0);
+        }
     }
+
 }
