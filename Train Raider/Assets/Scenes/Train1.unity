@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   player: {fileID: 509221073}
+  forwardInput: 0
 --- !u!1 &751159975
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403940511}
   m_LocalRotation: {x: 0.044086326, y: -0.94264746, z: 0.1382508, w: 0.30059767}
-  m_LocalPosition: {x: 10.682, y: 2.006, z: 4.399}
+  m_LocalPosition: {x: 11.2, y: 3.55, z: 5.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -523,6 +524,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1578354888}
+  - component: {fileID: 1578354890}
+  - component: {fileID: 1578354889}
   m_Layer: 0
   m_Name: TrainCar1
   m_TagString: Untagged
@@ -547,6 +550,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1578354889
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578354887}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 2, z: 1.5}
+  m_Center: {x: -4.7, y: -1.5, z: 4}
+--- !u!65 &1578354890
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578354887}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 2, z: 1.5}
+  m_Center: {x: 4.72, y: -1.5, z: 4}
 --- !u!1001 &2105949420
 PrefabInstance:
   m_ObjectHideFlags: 0

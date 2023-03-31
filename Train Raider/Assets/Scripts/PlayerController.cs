@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 1;
     public GameObject player;
+    public float forwardInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +16,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float forwardInput = Input.GetAxis("Vertical");
-        transform.Translate(forwardInput * Vector3.forward * Time.deltaTime * -speed);
+        forwardInput = Input.GetAxis("Vertical");
+
+        transform.Translate(forwardInput * Vector3.right * Time.deltaTime * -speed, Space.World);
         RotatePlayer();
     }
 
