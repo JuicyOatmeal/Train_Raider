@@ -5,16 +5,16 @@ using UnityEngine;
 public class ChangeMaterial : MonoBehaviour
 {
     public Material[] materials;
-    private int _currentIndex = 0;
+    //private int _currentIndex = 0;
     public Renderer TargetRenderer;
     public GameObject carriage;
     // Start is called before the first frame update
     void Start()
     {
-        carriage = GetComponent<GameObject>();
+        carriage = GameObject.FindWithTag("Carriage");
     }
-        
-    
+
+
 
     // Update is called once per frame
     void Update()
