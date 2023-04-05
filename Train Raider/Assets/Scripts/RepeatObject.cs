@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class RepeatObject : MonoBehaviour
 {
-    trackPrefab = GameObject;
+    public Vector3 startPos;
+    public float repeatWidth;
     // Start is called before the first frame update
     void Start()
     {
-        
+        startPos = transform.position;
+        repeatWidth = GetComponent<BoxCollider>().size.x / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    void GetLength()
-    {
-        trackPrefab.transform.length;
+        if (transform.position.x < startPos.x - repeatWidth)
+        {
+            transform.position = startPos;
+        }
     }
 }
