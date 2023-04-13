@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class RepeatObject : MonoBehaviour
 {
-    public Vector3 startPos;
+    
     public float repeatWidth;
+    public GameObject objectToRepeat;
+    public Vector3 startPos;
     // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
-        repeatWidth = GetComponent<BoxCollider>().size.x / 2;
+        repeatWidth = objectToRepeat.GetComponent<BoxCollider>().size.x;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x < startPos.x - repeatWidth)
+        if (objectToRepeat.transform.position.x > startPos.x + repeatWidth)
         {
             transform.position = startPos;
+            //Debug.Log("rail pos reset");
         }
     }
 }

@@ -17,9 +17,10 @@ public class MoveLeft : MonoBehaviour
     {
         transform.Translate(Vector3.right * Time.deltaTime * speed);
 
-        if (transform.position.x < rightBound && gameObject.CompareTag("Track"))
+        //if (transform.position.x < rightBound && gameObject.CompareTag("Track"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            //Debug.Log("destroyed rail");
         }
     }
 }

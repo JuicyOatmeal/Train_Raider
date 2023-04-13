@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Carriage
   - Track
+  - Wheel
   layers:
   - Default
   - TransparentFX

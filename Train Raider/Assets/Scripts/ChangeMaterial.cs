@@ -11,22 +11,18 @@ public class ChangeMaterial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        carriage = GameObject.FindWithTag("Carriage");
+        //carriage = GameObject.FindWithTag("Carriage");
     }
 
 
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter(Collider other)
     {
         carriage.GetComponent<Renderer>().material = materials[1];
+        Debug.Log("triggerenter");
     }
     private void OnTriggerExit(Collider other)
     {
         carriage.GetComponent<Renderer>().material = materials[0];
+        Debug.Log("triggerexit");
     }
 }

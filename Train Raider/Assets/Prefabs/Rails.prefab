@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5000004474624258869}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.311943, y: 13.789872, z: 42.742588}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -80,8 +80,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bead3a2683b940ab99da3a414c7ed09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0, z: 0}
   repeatWidth: 0
+  objectToRepeat: {fileID: 5000004474624258869}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!114 &-4615958471142062830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  rightBound: -100
+  rightBound: 0
 --- !u!1001 &5000004474215693771
 PrefabInstance:
   m_ObjectHideFlags: 0
