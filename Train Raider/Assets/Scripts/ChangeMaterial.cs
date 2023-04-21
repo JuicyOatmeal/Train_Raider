@@ -12,6 +12,7 @@ public class ChangeMaterial : MonoBehaviour
     void Start()
     {
         //carriage = GameObject.FindWithTag("Carriage");
+        carriage.GetComponent<Renderer>().material = materials[0];
     }
 
 

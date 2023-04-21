@@ -11,6 +11,7 @@ public class RepeatObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        objectToRepeat = gameObject;
         startPos = transform.position;
         repeatWidth = objectToRepeat.GetComponent<BoxCollider>().size.x;
     }
