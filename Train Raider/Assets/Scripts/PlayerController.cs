@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 1;
     public GameObject player;
     public float forwardInput;
+    public float leftBound;
+    public float rightBound;
+    public float playerPosX;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +20,19 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         forwardInput = Input.GetAxis("Vertical");
-
-        transform.Translate(forwardInput * Vector3.right * Time.deltaTime * -speed, Space.World);
-        RotatePlayer();
+        if (player.transform.position.x < leftBound && player.transform.position.x > rightBound)
+        {
+            transform.Translate(forwardInput * Vector3.right * Time.deltaTime * -speed, Space.World);
+            RotatePlayer();
+        }
+        else if (player.transform.position.x > leftBound)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * -speed, Space.World);
+        }
+        else if (player.transform.position.x < rightBound)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
+        }
     }
 
     void RotatePlayer()
