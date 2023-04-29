@@ -6,10 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 1;
     public GameObject player;
+    public float verticalInput;
     public float forwardInput;
     public float leftBound;
     public float rightBound;
     public float playerPosX;
+    public bool ableToClimb;
+    public bool isClimbing;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        verticalInput = Input.GetAxis("Jump");
         forwardInput = Input.GetAxis("Vertical");
         if (player.transform.position.x < leftBound && player.transform.position.x > rightBound)
         {
@@ -33,6 +37,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
         }
+        Climb();
     }
 
     void RotatePlayer()
@@ -45,6 +50,27 @@ public class PlayerController : MonoBehaviour
         {
             player.transform.eulerAngles = new Vector3(0, 90, 0);
         }
+    }
+    void Climb()
+    {
+        if (ableToClimb == true)
+        {
+            if (isClimbing == true)
+            {
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    transform.Translate(verticalInput * Vector3.up * Time.deltaTime * speed, Space.World);
+                }
+            }
+            else if (isClimbing == false)
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    transform.Translate(verticalInput * Vector3.up * Time.deltaTime * speed, Space.World);
+                }
+            }
+        }
+        
     }
 
 }

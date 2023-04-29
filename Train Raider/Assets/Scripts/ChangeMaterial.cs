@@ -19,11 +19,11 @@ public class ChangeMaterial : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         carriage.GetComponent<Renderer>().material = materials[1];
-        Debug.Log("triggerenter");
+        //Debug.Log("triggerenter");
     }
     private void OnTriggerExit(Collider other)
     {
         carriage.GetComponent<Renderer>().material = materials[0];
-        Debug.Log("triggerexit");
+        //Debug.Log("triggerexit");
     }
 }
