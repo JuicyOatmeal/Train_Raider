@@ -9,22 +9,33 @@ public class GenerateTerrain : MonoBehaviour
     public float spawnPosY = 1.26f;
     public float spawnPosZ = 10.3f;
     public float currentLocationX;
-    public float repeatTime = 1.3f;
+    public float repeatTime;
+    GameManager gameManager;
 
 
     void Start()
     {
-        InvokeRepeating("GenerateRandomPrefab", 0f, repeatTime);
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+        Invoke("GenerateRandomPrefab", 0);
     }
 
     void Update()
     {
         currentLocationX = gameObject.transform.position.x;
+        if (gameManager.fast == true)
+        {
+            repeatTime = 1.3f;
+        }
+        else if (gameManager.fast == false)
+        {
+            repeatTime = 2.6f;
+        }
     }
     void GenerateRandomPrefab()
     {
         int terrianIndex = Random.Range(0, terrianPrefabs.Length);
         Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, 10.3f);
         Instantiate(terrianPrefabs[terrianIndex], spawnPos, terrianPrefabs[terrianIndex].transform.rotation);
+        Invoke("GenerateRandomPrefab", repeatTime);
     }
 }
