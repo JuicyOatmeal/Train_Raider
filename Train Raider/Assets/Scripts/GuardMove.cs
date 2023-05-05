@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GuardMove : MonoBehaviour
 {
+    GameManager gameManager;
     public GameObject guard;
     public float leftBound;
     public float rightBound;
@@ -16,6 +17,7 @@ public class GuardMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         guard = this.gameObject;
         InvokeRepeating("DecideWhatToDo", 0, 4);
         StartCoroutine(ResetInts());
@@ -25,6 +27,8 @@ public class GuardMove : MonoBehaviour
     void Update()
     {
         guardPosX = guard.transform.position.x;
+        
+
     }
     void GoLeft()
     {
@@ -113,5 +117,9 @@ public class GuardMove : MonoBehaviour
         yield return new WaitForSeconds(2);
         intRight = 0;
         intLeft = 0;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        gameManager.gameOver = true;
     }
 }

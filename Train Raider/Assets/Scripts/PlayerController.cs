@@ -13,13 +13,6 @@ public class PlayerController : MonoBehaviour
     public float playerPosX;
     public bool ableToClimb;
     public bool isClimbing;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         verticalInput = Input.GetAxis("Jump");
@@ -39,7 +32,6 @@ public class PlayerController : MonoBehaviour
         }
         Climb();
     }
-
     void RotatePlayer()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -70,7 +62,5 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
     }
-
 }

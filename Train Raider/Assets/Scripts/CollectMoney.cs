@@ -14,7 +14,7 @@ public class CollectMoney : MonoBehaviour
     }
     private void Update()
     {
-        Instantiate(passiveParticle, transform.position, passiveParticle.transform.rotation);
+        //Instantiate(passiveParticle, transform.position, passiveParticle.transform.rotation);
     }
     private void OnTriggerEnter(Collider other)
     {
