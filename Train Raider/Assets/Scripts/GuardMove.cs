@@ -6,6 +6,7 @@ public class GuardMove : MonoBehaviour
 {
     GameManager gameManager;
     public GameObject guard;
+    public GameObject player;
     public float leftBound;
     public float rightBound;
     public float speed = 10;
@@ -14,11 +15,15 @@ public class GuardMove : MonoBehaviour
     public float amountToGoLeft = 40;
     public float amountToGoRight = 40;
     private float guardPosX;
+    bool alarm;
+    bool lookingLeft;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        player = GameObject.FindWithTag("Player");
         guard = this.gameObject;
+        alarm = false;
         InvokeRepeating("DecideWhatToDo", 0, 4);
         StartCoroutine(ResetInts());
     }
@@ -26,9 +31,13 @@ public class GuardMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(Vector3.Distance(player.transform.position, guard.transform.position));
+        Debug.Log(lookingLeft);
         guardPosX = guard.transform.position.x;
-        
-
+        if ((lookingLeft = false && (Vector3.Distance(player.transform.position, guard.transform.position) <= 10)) || (guard.transform.rotation.y == 180 && (Vector3.Distance(player.transform.position, guard.transform.position) >= 10)))
+        {
+            Debug.Log("alarm");
+        }
     }
     void GoLeft()
     {
@@ -69,10 +78,12 @@ public class GuardMove : MonoBehaviour
     void LookLeft()
     {
         guard.transform.eulerAngles = new Vector3(0, 90, 0);
+        lookingLeft = true;
     }
     void LookRight()
     {
         guard.transform.eulerAngles = new Vector3(0, 270, 0);
+        lookingLeft = false;
     }
     void LookAround()
     {
@@ -86,29 +97,24 @@ public class GuardMove : MonoBehaviour
         if (guardPosX < leftBound)
         {
             GoLeft();
-            Debug.Log("GoRight guardposx < leftbound");
         }
         else if (guardPosX > rightBound)
         {
             GoRight();
-            Debug.Log("GoLeft guardposx > rightbound");
         }
         else
         {
             if (choose == 0)
             {
                 GoLeft();
-                Debug.Log("goleft choose=0");
             }
             else if (choose == 1)
             {
                 GoRight();
-                Debug.Log("goright choose=1");
             }
             else if (choose == 2)
             {
                 LookAround();
-                Debug.Log("lookaround choose=2");
             }
         }
     }

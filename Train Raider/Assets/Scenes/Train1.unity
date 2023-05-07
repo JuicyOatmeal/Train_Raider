@@ -1614,6 +1614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   player: {fileID: 509221073}
+  gameManager: {fileID: 0}
   verticalInput: 0
   forwardInput: 0
   leftBound: 32
@@ -5212,7 +5213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1726317468
 RectTransform:
   m_ObjectHideFlags: 0
