@@ -15,8 +15,11 @@ public class GuardMove : MonoBehaviour
     public float amountToGoLeft = 40;
     public float amountToGoRight = 40;
     private float guardPosX;
-    bool alarm;
+    public bool alarm;
+    public float alarmRange;
     bool lookingLeft;
+    float distanceFromPlayer;
+    public bool playerToLeft;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,17 +34,22 @@ public class GuardMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Vector3.Distance(player.transform.position, guard.transform.position));
-        Debug.Log(lookingLeft);
+        Alarm();
+        distanceFromPlayer = Vector3.Distance(player.transform.position, guard.transform.position);
         guardPosX = guard.transform.position.x;
-        if ((lookingLeft = false && (Vector3.Distance(player.transform.position, guard.transform.position) <= 10)) || (guard.transform.rotation.y == 180 && (Vector3.Distance(player.transform.position, guard.transform.position) >= 10)))
+        if (player.transform.position.x - guardPosX >= 0)
         {
-            Debug.Log("alarm");
+            playerToLeft = true;
+            Debug.Log(player.transform.position.y - guard.transform.position.y);
+        }
+        else if (player.transform.position.x - guardPosX <= 0)
+        {
+            playerToLeft = false;
         }
     }
     void GoLeft()
     {
-        if (guard.transform.position.x > leftBound)
+        if (guardPosX > leftBound)
         {
             transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
             LookLeft();
@@ -59,7 +67,7 @@ public class GuardMove : MonoBehaviour
     }
     void GoRight()
     {
-        if (guard.transform.position.x < rightBound)
+        if (guardPosX < rightBound)
         {
             transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
             LookRight();
@@ -118,6 +126,25 @@ public class GuardMove : MonoBehaviour
             }
         }
     }
+
+    void Alarm()
+    {
+        if (player.transform.position.y - guard.transform.position.y <= 3)
+        {
+            if (distanceFromPlayer <= alarmRange)
+            {
+                if (lookingLeft == true && playerToLeft == true)
+                {
+                    alarm = true;
+                }
+                else if (lookingLeft = false && playerToLeft == false)
+                {
+                    alarm = true;
+                }
+            }
+        }
+    }
+
     IEnumerator ResetInts()
     {
         yield return new WaitForSeconds(2);
