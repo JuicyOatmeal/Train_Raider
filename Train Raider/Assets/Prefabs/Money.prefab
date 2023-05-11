@@ -111,3 +111,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  passiveParticle: {fileID: 7303472089845130122, guid: 61f5203f0a76c154c9d0aae67113a5ab, type: 3}

@@ -12,8 +12,8 @@ public class GuardMove : MonoBehaviour
     public float speed = 10;
     private int intLeft;
     private int intRight;
-    public float amountToGoLeft = 40;
-    public float amountToGoRight = 40;
+    public float amountToGoLeft;
+    public float amountToGoRight;
     private float guardPosX;
     public bool alarm;
     public float alarmRange;
@@ -27,7 +27,7 @@ public class GuardMove : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         guard = this.gameObject;
         alarm = false;
-        InvokeRepeating("DecideWhatToDo", 0, 4);
+        InvokeRepeating("DecideWhatToDo", 0, 2f);
         StartCoroutine(ResetInts());
     }
 
@@ -35,12 +35,31 @@ public class GuardMove : MonoBehaviour
     void Update()
     {
         Alarm();
+        FindPlayer();
+        SetAmountToMove();
         distanceFromPlayer = Vector3.Distance(player.transform.position, guard.transform.position);
         guardPosX = guard.transform.position.x;
+        
+    }
+
+    void SetAmountToMove()
+    {
+        if (alarm == false)
+        {
+            amountToGoLeft = 300;
+            amountToGoRight = 300; 
+        }
+        else if (alarm == true)
+        {
+            amountToGoLeft = 800;
+            amountToGoRight = 800;
+        }
+    }
+    void FindPlayer()
+    {
         if (player.transform.position.x - guardPosX >= 0)
         {
             playerToLeft = true;
-            Debug.Log(player.transform.position.y - guard.transform.position.y);
         }
         else if (player.transform.position.x - guardPosX <= 0)
         {
@@ -95,34 +114,49 @@ public class GuardMove : MonoBehaviour
     }
     void LookAround()
     {
-        Invoke("LookLeft", 2);
-        Invoke("LookRight", 3.5f);
+        Invoke("LookLeft", 0.5f);
+        Invoke("LookRight", 2f);
         //Debug.Log("LookAround");
     }
     void DecideWhatToDo()
     {
-        int choose = Random.Range(0, 3); //choose a number from 0-2
-        if (guardPosX < leftBound)
+        if (alarm == false)
         {
-            GoLeft();
-        }
-        else if (guardPosX > rightBound)
-        {
-            GoRight();
-        }
-        else
-        {
-            if (choose == 0)
+            int choose = Random.Range(0, 3); //choose a number from 0-2
+            if (guardPosX < leftBound)
             {
                 GoLeft();
             }
-            else if (choose == 1)
+            else if (guardPosX > rightBound)
             {
                 GoRight();
             }
-            else if (choose == 2)
+            else
             {
-                LookAround();
+                if (choose == 0)
+                {
+                    GoLeft();
+                }
+                else if (choose == 1)
+                {
+                    GoRight();
+                }
+                else if (choose == 2)
+                {
+                    LookAround();
+                }
+            }
+        }
+        else if (alarm == true)
+        {
+            if (playerToLeft == true)
+            {
+                GoLeft();
+                //Invoke("DecideWhatToDo", 1);
+            }
+            else if (playerToLeft == false)
+            {
+                GoRight();
             }
         }
     }

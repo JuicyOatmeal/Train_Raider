@@ -5,12 +5,13 @@ using UnityEngine;
 public class CheckPlayerInside : MonoBehaviour
 {
     private PlayerController playerController;
-    // Start is called before the first frame update
+
     void Start()
     {
         playerController = GameObject.FindObjectOfType<PlayerController>();
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other) // when the player enters a carriage, set the isClimbing variable to false
     {
         playerController.isClimbing = false;
     }

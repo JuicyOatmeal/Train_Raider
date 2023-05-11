@@ -17,14 +17,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        verticalInput = Input.GetAxis("Jump");
-        forwardInput = Input.GetAxis("Vertical");
+        
     }
     void Update()
     {
+        verticalInput = Input.GetAxis("Jump");
+        forwardInput = Input.GetAxis("Vertical");
         Move();
     }
-
     void Move()
     {
         if (gameManager.gameOver == false)
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
                 transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
             }
             Climb();
-            //FixPlayerPos();
+            FixPlayerPos();
         }
     }
     void RotatePlayer()
@@ -78,29 +78,20 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void FixPlayerPos()
+    public void FixPlayerPos()
     {
-        if ((isClimbing == true && ableToClimb == false) || (isClimbing == false && ableToClimb == false))
+        if (ableToClimb == false)
         {
-            FixPlayerPosCo();
+            if (isClimbing == true && ableToClimb == false)
+            {
+                Vector3 currentPosUp = new Vector3(transform.position.x, 9.5f, transform.position.z);
+                player.transform.position = currentPosUp;
+            }
+            else if (isClimbing == false && ableToClimb == false)
+            {
+                Vector3 currentPosDown = new Vector3(transform.position.x, 5.9f, transform.position.z);
+                player.transform.position = currentPosDown;
+            }
         }
-    }
-    IEnumerator FixPlayerPosCo()
-    {
-        yield return new WaitForSeconds(0.1f);
-        if (isClimbing == true && ableToClimb == false)
-        {
-            Vector3 currentPosUp = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            player.transform.position = currentPosUp;
-        }
-        else if (isClimbing == false && ableToClimb == false)
-        {
-            Vector3 currentPosDown = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            player.transform.position = currentPosDown;
-        }
-    }
-    void VariableChangeHandler(int newVal)
-    {
-
     }
 }

@@ -877,6 +877,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1394461138}
     m_Modifications:
+    - target: {fileID: -7937294713611547811, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
+      propertyPath: passiveParticle
+      value: 
+      objectReference: {fileID: 7303472089845130122, guid: 61f5203f0a76c154c9d0aae67113a5ab, type: 3}
     - target: {fileID: 2464988732922791739, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_Name
       value: Money (5)
@@ -1833,31 +1837,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.5
+      value: 15.372
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -32.8
+      value: -31.958
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.6938536
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.7201161
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -92.128
       objectReference: {fileID: 0}
     - target: {fileID: 2464988732922791742, guid: 0bb3763a445b5de4eb87236307133810, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -2116,8 +2120,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.2664537, z: 1}
+  m_Center: {x: 0, y: -0.13322687, z: 0}
 --- !u!114 &670734387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2960,8 +2964,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.4478765, z: 1}
+  m_Center: {x: 0, y: 0.22393823, z: 0}
 --- !u!114 &1030407311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5984,6 +5988,7 @@ MonoBehaviour:
   moneyCollected: 0
   fast: 0
   gameOver: 0
+  win: 0
   moneyText: {fileID: 1771448966}
   gameOverText: {fileID: 1726317469}
 --- !u!4 &1979059780

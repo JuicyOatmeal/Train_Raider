@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class ChangeMaterial : MonoBehaviour
 {
-    public Material[] materials;
-    //private int _currentIndex = 0;
+    public Material[] materials; // makes an array named materials
     public Renderer TargetRenderer;
     public GameObject carriage;
-    // Start is called before the first frame update
     void Start()
     {
-        //carriage = GameObject.FindWithTag("Carriage");
-        carriage.GetComponent<Renderer>().material = materials[0];
+        carriage.GetComponent<Renderer>().material = materials[0]; // before the first frame, set the carriages material to solid
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // when the player enters the carriage, set the material to transparent
     {
         carriage.GetComponent<Renderer>().material = materials[1];
-        //Debug.Log("triggerenter");
     }
-    private void OnTriggerExit(Collider other)
+
+    private void OnTriggerExit(Collider other) // when the player exits the carriage, set the material to solid
     {
         carriage.GetComponent<Renderer>().material = materials[0];
-        //Debug.Log("triggerexit");
     }
 }
