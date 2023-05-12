@@ -8,7 +8,7 @@ public class RepeatObject : MonoBehaviour
     public float repeatWidth;
     public GameObject objectToRepeat;
     public Vector3 startPos;
-    // Start is called before the first frame update
+
     void Start()
     {
         objectToRepeat = gameObject;
@@ -16,13 +16,11 @@ public class RepeatObject : MonoBehaviour
         repeatWidth = objectToRepeat.GetComponent<BoxCollider>().size.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (objectToRepeat.transform.position.x > startPos.x + repeatWidth)
+        if (objectToRepeat.transform.position.x > startPos.x + repeatWidth) // if the position of the object is past the repeat width, reset it's position to the starting position
         {
             transform.position = startPos;
-            //Debug.Log("rail pos reset");
         }
     }
 }

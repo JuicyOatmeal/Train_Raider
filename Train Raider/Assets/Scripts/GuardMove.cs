@@ -20,18 +20,15 @@ public class GuardMove : MonoBehaviour
     bool lookingLeft;
     float distanceFromPlayer;
     public bool playerToLeft;
-    // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
         player = GameObject.FindWithTag("Player");
         guard = this.gameObject;
         alarm = false;
-        InvokeRepeating("DecideWhatToDo", 0, 2f);
-        StartCoroutine(ResetInts());
+        InvokeRepeating("DecideWhatToDo", 0, 2f); // starts the DecideWhatToDo script and call it every two seconds
+        StartCoroutine(ResetInts()); // makes sure the ints which allow the guard to move are set correctly on start
     }
-
-    // Update is called once per frame
     void Update()
     {
         Alarm();
@@ -41,8 +38,7 @@ public class GuardMove : MonoBehaviour
         guardPosX = guard.transform.position.x;
         
     }
-
-    void SetAmountToMove()
+    void SetAmountToMove() // makes the guard move further if the alarm is set off as is it is chasing the player
     {
         if (alarm == false)
         {
@@ -55,7 +51,7 @@ public class GuardMove : MonoBehaviour
             amountToGoRight = 800;
         }
     }
-    void FindPlayer()
+    void FindPlayer() // allows the guard to detect which side of the guard the player is on
     {
         if (player.transform.position.x - guardPosX >= 0)
         {
@@ -66,7 +62,7 @@ public class GuardMove : MonoBehaviour
             playerToLeft = false;
         }
     }
-    void GoLeft()
+    void GoLeft() // makes the guard go left provided it is within the bounds of the train
     {
         if (guardPosX > leftBound)
         {
@@ -84,7 +80,7 @@ public class GuardMove : MonoBehaviour
             }
         }
     }
-    void GoRight()
+    void GoRight() // makes the guard go right provided it is within the bounds of the train
     {
         if (guardPosX < rightBound)
         {
@@ -102,27 +98,27 @@ public class GuardMove : MonoBehaviour
             }
         }
     }
-    void LookLeft()
+    void LookLeft() // makes the guard look left
     {
         guard.transform.eulerAngles = new Vector3(0, 90, 0);
         lookingLeft = true;
     }
-    void LookRight()
+    void LookRight() // makes the guard look right
     {
         guard.transform.eulerAngles = new Vector3(0, 270, 0);
         lookingLeft = false;
     }
-    void LookAround()
+    void LookAround() // makes the guard look around after a delay
     {
         Invoke("LookLeft", 0.5f);
         Invoke("LookRight", 2f);
         //Debug.Log("LookAround");
     }
-    void DecideWhatToDo()
+    void DecideWhatToDo() // is called every 2 seconds, calls a method which makes the guard move
     {
-        if (alarm == false)
+        if (alarm == false) // if the alarm is set off, do a random one of 3 methods
         {
-            int choose = Random.Range(0, 3); //choose a number from 0-2
+            int choose = Random.Range(0, 3);
             if (guardPosX < leftBound)
             {
                 GoLeft();
@@ -147,7 +143,7 @@ public class GuardMove : MonoBehaviour
                 }
             }
         }
-        else if (alarm == true)
+        else if (alarm == true) // if the alarm is set off, move in the direction of the player
         {
             if (playerToLeft == true)
             {
@@ -160,8 +156,7 @@ public class GuardMove : MonoBehaviour
             }
         }
     }
-
-    void Alarm()
+    void Alarm() // makes alarm = true if the player is within detection radius
     {
         if (player.transform.position.y - guard.transform.position.y <= 3)
         {
@@ -178,14 +173,13 @@ public class GuardMove : MonoBehaviour
             }
         }
     }
-
-    IEnumerator ResetInts()
+    IEnumerator ResetInts() // resets the ints which decide how long the player moves in a certain direction.
     {
         yield return new WaitForSeconds(2);
         intRight = 0;
         intLeft = 0;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // if the player collides with the guard, make gameOver = true
     {
         gameManager.gameOver = true;
     }

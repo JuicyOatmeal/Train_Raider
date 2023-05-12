@@ -21,7 +21,7 @@ public class GenerateTerrain : MonoBehaviour
 
     void Update()
     {
-        currentLocationX = gameObject.transform.position.x;
+        currentLocationX = gameObject.transform.position.x; 
         if (gameManager.fast == true)
         {
             repeatTime = 1.3f;
@@ -31,11 +31,11 @@ public class GenerateTerrain : MonoBehaviour
             repeatTime = 2.6f;
         }
     }
-    void GenerateRandomPrefab()
+    void GenerateRandomPrefab() // randomly generates one of the prefabs in the terrainPrefabs[] 
     {
-        int terrianIndex = Random.Range(0, terrianPrefabs.Length);
-        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, 10.3f);
-        Instantiate(terrianPrefabs[terrianIndex], spawnPos, terrianPrefabs[terrianIndex].transform.rotation);
-        Invoke("GenerateRandomPrefab", repeatTime);
+        int terrianIndex = Random.Range(0, terrianPrefabs.Length); // tells which terrainPrefab it should generate
+        Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, 10.3f); // sets the spawn position to spawnPos
+        Instantiate(terrianPrefabs[terrianIndex], spawnPos, terrianPrefabs[terrianIndex].transform.rotation); // instantiate the randomly generated object at the spawnPos
+        Invoke("GenerateRandomPrefab", repeatTime); // recalls the method so that it loops
     }
 }

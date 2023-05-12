@@ -7,17 +7,17 @@ public class MoveLeft : MonoBehaviour
     public float speed = 30;
     public float rightBound = -100;
     public GameManager gameManager;
-    // Start is called before the first frame update
+
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() 
     {
-        transform.Translate(Vector3.right * Time.deltaTime * speed);
-        if (gameManager.fast == true)
+        transform.Translate(Vector3.right * Time.deltaTime * speed); // move left at a certain speed
+        // set the speed based on the GameManager script
+        if (gameManager.fast == true) 
         {
             speed = 20;
         }
@@ -25,7 +25,5 @@ public class MoveLeft : MonoBehaviour
         {
             speed = 10;
         }
-        
     }
-    
 }

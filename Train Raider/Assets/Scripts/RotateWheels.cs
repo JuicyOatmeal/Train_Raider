@@ -6,15 +6,14 @@ public class RotateWheels : MonoBehaviour
 {
     public GameObject wheel;
     public float rotateSpeed = 50;
-    public Vector3 rotateDirection = new Vector3(10, 0, 0); 
-    // Start is called before the first frame update
+    public Vector3 rotateDirection = new Vector3(10, 0, 0);
+
     void Start()
     {
         wheel = gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Update() // rotates wheels at the rotateSpeed
     {
         wheel.transform.Rotate(rotateSpeed * rotateDirection * Time.deltaTime);
     }

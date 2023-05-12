@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        
     }
     void Update()
     {
@@ -25,20 +24,20 @@ public class PlayerController : MonoBehaviour
         forwardInput = Input.GetAxis("Vertical");
         Move();
     }
-    void Move()
+    void Move() 
     {
-        if (gameManager.gameOver == false)
+        if (gameManager.gameOver == false) // does this only if the game isn't over
         {
-            if (player.transform.position.x < leftBound && player.transform.position.x > rightBound)
+            if (player.transform.position.x < leftBound && player.transform.position.x > rightBound) // makes the player only able to move while they're inside the bounds of the train
             {
                 transform.Translate(forwardInput * Vector3.right * Time.deltaTime * -speed, Space.World);
                 RotatePlayer();
             }
-            else if (player.transform.position.x > leftBound)
+            else if (player.transform.position.x > leftBound) // brings the player back into bounds if it goes outside
             {
                 transform.Translate(Vector3.right * Time.deltaTime * -speed, Space.World);
             }
-            else if (player.transform.position.x < rightBound)
+            else if (player.transform.position.x < rightBound) // brings the player back into bounds if it goes outside
             {
                 transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
             }
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
             FixPlayerPos();
         }
     }
-    void RotatePlayer()
+    void RotatePlayer() // rotates the player based on which key is pressed
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -57,7 +56,7 @@ public class PlayerController : MonoBehaviour
             player.transform.eulerAngles = new Vector3(0, 90, 0);
         }
     }
-    void Climb()
+    void Climb() // moves the player up and down provided the player is ableToClimb
     {
         if (ableToClimb == true)
         {
@@ -78,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void FixPlayerPos()
+    public void FixPlayerPos() // if the player is at the wrong Y level when they stop being able to climb, set it to the correct level
     {
         if (ableToClimb == false)
         {
