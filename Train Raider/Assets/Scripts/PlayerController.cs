@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
     public GameManager gameManager;
     public float verticalInput;
     public float forwardInput;
+    public float sidewaysInput;
     public float leftBound;
     public float rightBound;
     public float playerPosX;
     public bool ableToClimb;
     public bool isClimbing;
+    public bool escaping;
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         verticalInput = Input.GetAxis("Jump");
         forwardInput = Input.GetAxis("Vertical");
+        sidewaysInput = Input.GetAxis("Horizontal");
         Move();
     }
     void Move() 
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
             }
             Climb();
             FixPlayerPos();
+            JumpOff();
         }
     }
     void RotatePlayer() // rotates the player based on which key is pressed
@@ -73,6 +77,19 @@ public class PlayerController : MonoBehaviour
                 {
                     transform.Translate(verticalInput * Vector3.up * Time.deltaTime * speed, Space.World);
                 }
+            }
+        }
+    }
+
+    void JumpOff()
+    {
+        if (ableToClimb == true || isClimbing == true)
+        {
+            if (Input.GetKey(KeyCode.D))
+            {
+                Vector3 jumpingPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.1f);
+                player.transform.position = jumpingPos;
+                escaping = true;
             }
         }
     }

@@ -16,9 +16,12 @@ public class CheckClimbable : MonoBehaviour
         playerController.ableToClimb = true;
     }
 
-    private void OnTriggerExit(Collider other) // when the player exits the collider sets ableToClimb in the PlayerController script to false, and also runs FixPlayerPos() inside that script
+    private void OnTriggerExit(Collider other) // when the player exits the collider sets ableToClimb in the PlayerController script to false, and also runs FixPlayerPos() inside that script if the player isn't escaping
     {
-        playerController.ableToClimb = false;
-        playerController.FixPlayerPos();
+        if (playerController.escaping != true)
+        {
+            playerController.ableToClimb = false;
+            playerController.FixPlayerPos();
+        }
     }
 }

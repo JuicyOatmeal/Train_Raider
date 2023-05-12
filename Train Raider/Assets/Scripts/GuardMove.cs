@@ -72,7 +72,6 @@ public class GuardMove : MonoBehaviour
             if (intLeft < amountToGoLeft)
             {
                 Invoke("GoLeft", 0);
-                //Debug.Log("GoLeft");
             }
             if (intLeft >= amountToGoLeft)
             {
@@ -90,7 +89,6 @@ public class GuardMove : MonoBehaviour
             if (intRight < amountToGoRight)
             {
                 Invoke("GoRight", 0);
-                //Debug.Log("GoRight loop");
             }
             if (intRight >= amountToGoRight)
             {
@@ -98,12 +96,12 @@ public class GuardMove : MonoBehaviour
             }
         }
     }
-    void LookLeft() // makes the guard look left
+    void LookLeft() // makes the guard face left
     {
         guard.transform.eulerAngles = new Vector3(0, 90, 0);
         lookingLeft = true;
     }
-    void LookRight() // makes the guard look right
+    void LookRight() // makes the guard face right
     {
         guard.transform.eulerAngles = new Vector3(0, 270, 0);
         lookingLeft = false;
