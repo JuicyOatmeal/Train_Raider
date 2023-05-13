@@ -16,12 +16,14 @@ public class PlayerController : MonoBehaviour
     public bool ableToClimb;
     public bool isClimbing;
     public bool escaping;
+    public bool triedJump;
     void Start()
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
     }
     void Update()
     {
+        gameManager.win = escaping;
         verticalInput = Input.GetAxis("Jump");
         forwardInput = Input.GetAxis("Vertical");
         sidewaysInput = Input.GetAxis("Horizontal");
@@ -46,7 +48,7 @@ public class PlayerController : MonoBehaviour
             }
             Climb();
             FixPlayerPos();
-            JumpOff();
+            StartCoroutine(JumpOffCo());
         }
     }
     void RotatePlayer() // rotates the player based on which key is pressed
@@ -83,31 +85,68 @@ public class PlayerController : MonoBehaviour
 
     void JumpOff()
     {
-        if (ableToClimb == true || isClimbing == true)
-        {
-            if (Input.GetKey(KeyCode.D))
-            {
-                Vector3 jumpingPos = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.1f);
-                player.transform.position = jumpingPos;
-                escaping = true;
-            }
-        }
+        
     }
     
     public void FixPlayerPos() // if the player is at the wrong Y level when they stop being able to climb, set it to the correct level
     {
-        if (ableToClimb == false)
+        if (escaping == false)
         {
-            if (isClimbing == true && ableToClimb == false)
+            if (ableToClimb == false)
             {
-                Vector3 currentPosUp = new Vector3(transform.position.x, 9.5f, transform.position.z);
-                player.transform.position = currentPosUp;
-            }
-            else if (isClimbing == false && ableToClimb == false)
-            {
-                Vector3 currentPosDown = new Vector3(transform.position.x, 5.9f, transform.position.z);
-                player.transform.position = currentPosDown;
+                if (isClimbing == true && ableToClimb == false)
+                {
+                    Vector3 currentPosUp = new Vector3(transform.position.x, 9.5f, transform.position.z);
+                    player.transform.position = currentPosUp;
+                }
+                else if (isClimbing == false && ableToClimb == false)
+                {
+                    Vector3 currentPosDown = new Vector3(transform.position.x, 5.9f, transform.position.z);
+                    player.transform.position = currentPosDown;
+                }
             }
         }
+    }
+
+    public void FixPlayerPosEscaped()
+    {
+        Vector3 currentPosEscaped = new Vector3(transform.position.x, 2.5f, transform.position.z);
+        player.transform.position = currentPosEscaped;
+    }
+
+    IEnumerator JumpOffCo()
+    {
+        if (gameManager.fast == false)
+        {
+            if (ableToClimb == true || isClimbing == true)
+            {
+                if (Input.GetKey(KeyCode.D))
+                {
+                    escaping = true;
+                }
+            }
+            if (escaping == true)
+            {
+                if (transform.position.y >= 2.5)
+                {
+                    Vector3 jumpingPos = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z + 1f);
+                    yield return new WaitForSeconds(0.05f);
+                    player.transform.position = jumpingPos;
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.D) && (isClimbing || ableToClimb == true))
+            {
+                StartCoroutine(TriedJump());
+            }
+        }
+    }
+    IEnumerator TriedJump()
+    {
+        triedJump = true;
+        yield return new WaitForSeconds(2);
+        triedJump = false;
     }
 }

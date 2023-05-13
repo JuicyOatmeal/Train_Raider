@@ -5,16 +5,24 @@ using UnityEngine;
 public class RotateWheels : MonoBehaviour
 {
     public GameObject wheel;
-    public float rotateSpeed = 50;
+    GameManager gameManager;
     public Vector3 rotateDirection = new Vector3(10, 0, 0);
 
     void Start()
     {
         wheel = gameObject;
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     void Update() // rotates wheels at the rotateSpeed
     {
-        wheel.transform.Rotate(rotateSpeed * rotateDirection * Time.deltaTime);
+        if (gameManager.fast == false)
+        {
+            wheel.transform.Rotate(20 * rotateDirection * Time.deltaTime);
+        }
+        else
+        {
+            wheel.transform.Rotate(40 * rotateDirection * Time.deltaTime);
+        }
     }
 }

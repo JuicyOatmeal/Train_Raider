@@ -6,18 +6,22 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public MoveLeft moveLeft;
+    public PlayerController playerController;
+    public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI cantJumpText;
+    public TextMeshProUGUI youWinText;
     public int moneyCollected;
     public bool fast;
     public bool gameOver;
     public bool win;
-    public TextMeshProUGUI moneyText;
-    public TextMeshProUGUI gameOverText;
-    // Start is called before the first frame update
     void Start()
     {
+        playerController = GameObject.FindObjectOfType<PlayerController>();
         win = false;
         gameOver = false;
         gameOverText.gameObject.SetActive(false);
+        youWinText.gameObject.SetActive(false);
         TrainSpeedSlow();
         Invoke("TrainSpeedFast", 15);
         Invoke("TrainSpeedSlow", 30);
@@ -31,6 +35,27 @@ public class GameManager : MonoBehaviour
         if (gameOver == true)
         {
             gameOverText.gameObject.SetActive(true);
+        }
+
+        if (playerController.triedJump == true)
+        {
+            cantJumpText.gameObject.SetActive(true);
+        }
+        else
+        {
+            cantJumpText.gameObject.SetActive(false);
+        }
+
+        if (win == false)
+        {
+            youWinText.gameObject.SetActive(false);
+            moneyText.gameObject.SetActive(true);
+        }
+        else if (win == true)
+        {
+            moneyText.gameObject.SetActive(false);
+            youWinText.text = "You escaped with " + moneyCollected + " dollars collected!";
+            youWinText.gameObject.SetActive(true);
         }
     }
     void TrainSpeedFast()
