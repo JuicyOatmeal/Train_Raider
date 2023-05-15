@@ -6,7 +6,7 @@ public class RotateWheels : MonoBehaviour
 {
     public GameObject wheel;
     GameManager gameManager;
-    public Vector3 rotateDirection = new Vector3(10, 0, 0);
+    public Vector3 rotateDirection = new Vector3(10, 0, 0); // sets the rotateDirection to a Vector3
 
     void Start()
     {
@@ -14,7 +14,7 @@ public class RotateWheels : MonoBehaviour
         gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
-    void Update() // rotates wheels at the rotateSpeed
+    void Update() // rotates wheels at a certain speed depending on if the train is going fast or slow
     {
         if (gameManager.fast == false)
         {

@@ -14,7 +14,7 @@ public class TrainMove : MonoBehaviour
 
     void Update()
     {
-        if (playerController.escaping == true)
+        if (playerController.escaping == true) // if the player has escaped, make the train start moving at the speed from the MoveLeft script
         {
             transform.Translate(Vector3.left * Time.deltaTime * moveLeft.speed);
         }

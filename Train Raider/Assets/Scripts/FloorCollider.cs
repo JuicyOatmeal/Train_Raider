@@ -11,6 +11,6 @@ public class FloorCollider : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        playerController.FixPlayerPosEscaped();
+        playerController.FixPlayerPosEscaped(); // when the player enters the collider of the floor, call the FixPlayerPosEscaped() method in the PlayerController script
     }
 }

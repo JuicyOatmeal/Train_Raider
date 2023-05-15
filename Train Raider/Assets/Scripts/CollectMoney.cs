@@ -16,16 +16,16 @@ public class CollectMoney : MonoBehaviour
     }
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        timer -= Time.deltaTime; // timer goes down at a set speed
+        if (timer <= 0) // if the timer is less than or equal to 0
         {
-            Instantiate(passiveParticle, transform.position, passiveParticle.transform.rotation);
-            timer = particleDelay;
+            Instantiate(passiveParticle, transform.position, passiveParticle.transform.rotation); // make a particle on top of the money
+            timer = particleDelay; // reset the timer
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) 
     {
-        gameManager.moneyCollected += 100;
-        Destroy(moneyPrefab);
+        gameManager.moneyCollected += 100; // add 100 to the moneyCollected variable inside the GameManager script
+        Destroy(moneyPrefab); // destroy the money
     }
 }

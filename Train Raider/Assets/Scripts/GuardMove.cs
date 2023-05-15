@@ -68,12 +68,12 @@ public class GuardMove : MonoBehaviour
         {
             transform.Translate(Vector3.right * Time.deltaTime * speed, Space.World);
             LookLeft();
-            intLeft++;
-            if (intLeft < amountToGoLeft)
+            intLeft++; // add one to this var every time the method is called
+            if (intLeft < amountToGoLeft) // if intLeft hasn't been called at least amountToGoLeft times yet, call it again
             {
                 Invoke("GoLeft", 0);
             }
-            if (intLeft >= amountToGoLeft)
+            if (intLeft >= amountToGoLeft) // if intLeft has been called at least amountToGoLeft, don't recall GoLeft() and reset the intLeft
             {
                 StartCoroutine(ResetInts());
             }
@@ -86,11 +86,11 @@ public class GuardMove : MonoBehaviour
             transform.Translate(Vector3.left * Time.deltaTime * speed, Space.World);
             LookRight();
             intRight++;
-            if (intRight < amountToGoRight)
+            if (intRight < amountToGoRight) // if intRight hasn't been called at least amountToGoRight times yet, call it again
             {
                 Invoke("GoRight", 0);
             }
-            if (intRight >= amountToGoRight)
+            if (intRight >= amountToGoRight) // if intRight has been called at least amountToGoRight, don't recall GoRight() and reset the intRight
             {
                 StartCoroutine(ResetInts());
             }
@@ -114,14 +114,14 @@ public class GuardMove : MonoBehaviour
     }
     void DecideWhatToDo() // is called every 2 seconds, calls a method which makes the guard move
     {
-        if (alarm == false) // if the alarm is set off, do a random one of 3 methods
+        if (alarm == false) // if the alarm isn't set off, do a random one of 3 methods
         {
             int choose = Random.Range(0, 3);
-            if (guardPosX < leftBound)
+            if (guardPosX < leftBound) // don't call a random method if the guard is outside of the train's bounds
             {
                 GoLeft();
             }
-            else if (guardPosX > rightBound)
+            else if (guardPosX > rightBound) // don't call a random method if the guard is outside of the train's bounds
             {
                 GoRight();
             }
@@ -156,24 +156,24 @@ public class GuardMove : MonoBehaviour
     }
     void Alarm() // makes alarm = true if the player is within detection radius
     {
-        if (player.transform.position.y - guard.transform.position.y <= 3)
+        if (player.transform.position.y - guard.transform.position.y <= 3) // if the player is on the same Y level as the guard
         {
-            if (distanceFromPlayer <= alarmRange)
+            if (distanceFromPlayer <= alarmRange) // if the guard is within alarmRange of the player
             {
-                if (lookingLeft == true && playerToLeft == true)
+                if (lookingLeft == true && playerToLeft == true) // if the guard is looking in the direction of the player
                 {
-                    alarm = true;
+                    alarm = true; // set off the alarm
                 }
-                else if (lookingLeft = false && playerToLeft == false)
+                else if (lookingLeft = false && playerToLeft == false) // if the guard is looking in the direction of the player
                 {
-                    alarm = true;
+                    alarm = true; // set off the alarm
                 }
             }
         }
     }
-    IEnumerator ResetInts() // resets the ints which decide how long the player moves in a certain direction.
+    IEnumerator ResetInts() // resets the ints which decide how long the player moves in a certain direction after 2 seconds
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2); 
         intRight = 0;
         intLeft = 0;
     }

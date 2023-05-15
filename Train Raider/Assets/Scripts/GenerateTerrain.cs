@@ -52,16 +52,16 @@ public class GenerateTerrain : MonoBehaviour
             Invoke("GenerateRandomTerrain", repeatTime); // recalls the method so that it loops
         }
     }
-    void GenerateRandomScenery()
+    void GenerateRandomScenery() // randomly generates one of the prefabs in the sceneryPrefabs[] 
     {
-        if (gameManager.win == false)
+        if (gameManager.win == false) 
         {
-            int sceneryIndex = Random.Range(0, sceneryPrefabs.Length);
-            Vector3 spawnPos = new Vector3(scenerySpawnPosX, spawnPosY, Random.Range(sceneryLeftBound, sceneryRightBound));
-            Instantiate(sceneryPrefabs[sceneryIndex], spawnPos, sceneryPrefabs[sceneryIndex].transform.rotation);
-            Vector3 spawnPosAlt = new Vector3(scenerySpawnPosX, spawnPosY, Random.Range(sceneryLeftBoundAlt, sceneryRightBoundAlt));
-            Instantiate(sceneryPrefabs[sceneryIndex], spawnPosAlt, sceneryPrefabs[sceneryIndex].transform.rotation);
-            Invoke("GenerateRandomScenery", Random.Range(0.1f, 0.5f));
+            int sceneryIndex = Random.Range(0, sceneryPrefabs.Length); //  tells which sceneryPrefab it should generate
+            Vector3 spawnPos = new Vector3(scenerySpawnPosX, spawnPosY, Random.Range(sceneryLeftBound, sceneryRightBound)); // sets  the sceneryPrefab's spawnPos at a random place between the right and left bound
+            Instantiate(sceneryPrefabs[sceneryIndex], spawnPos, sceneryPrefabs[sceneryIndex].transform.rotation); // instantiate the sceneryPrefab at spawnPos
+            Vector3 spawnPosAlt = new Vector3(scenerySpawnPosX, spawnPosY, Random.Range(sceneryLeftBoundAlt, sceneryRightBoundAlt)); // sets  the sceneryPrefab's spawnPosAlt at a random place between the right and left bound
+            Instantiate(sceneryPrefabs[sceneryIndex], spawnPosAlt, sceneryPrefabs[sceneryIndex].transform.rotation); // instantiate the sceneryPrefab at spawnPosAlt
+            Invoke("GenerateRandomScenery", Random.Range(0.1f, 0.5f)); // recall the method after a time between 0.1 and 0.5 seconds
         }
     }
 }

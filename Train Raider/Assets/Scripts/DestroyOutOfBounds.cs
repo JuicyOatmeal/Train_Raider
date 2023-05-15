@@ -10,7 +10,7 @@ public class DestroyOutOfBounds : MonoBehaviour
     {
         if(gameObject.transform.position.x > bound)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // destroy the gameObject if it goes a certain distance in the X direction
         }
     }
 }

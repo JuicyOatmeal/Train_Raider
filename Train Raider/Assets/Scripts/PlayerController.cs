@@ -83,10 +83,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void JumpOff()
-    {
-        
-    }
     
     public void FixPlayerPos() // if the player is at the wrong Y level when they stop being able to climb, set it to the correct level
     {
@@ -108,42 +104,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void FixPlayerPosEscaped()
+    public void FixPlayerPosEscaped() // when the player escapes, set the Y level to 2.5
     {
         Vector3 currentPosEscaped = new Vector3(transform.position.x, 2.5f, transform.position.z);
         player.transform.position = currentPosEscaped;
     }
 
-    IEnumerator JumpOffCo()
+    IEnumerator JumpOffCo() // allows the player to escape/jump off the train
     {
-        if (gameManager.fast == false)
+        if (gameManager.fast == false) // if the train is going slow
         {
-            if (ableToClimb == true || isClimbing == true)
+            if (ableToClimb == true || isClimbing == true) // if the player is either ableToClimb or isClimbing
             {
-                if (Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.D)) 
                 {
-                    escaping = true;
+                    escaping = true; // set escaping to true
                 }
             }
-            if (escaping == true)
+            if (escaping == true) 
             {
-                if (transform.position.y >= 2.5)
+                if (transform.position.y >= 3) // if the player's position is greater than or equal to 3
                 {
-                    Vector3 jumpingPos = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z + 1f);
-                    yield return new WaitForSeconds(0.05f);
-                    player.transform.position = jumpingPos;
+                    Vector3 jumpingPos = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z + 1f); // make the player's next place to jump to by adding to it's Z coordinate and taking away from it's Y coordinate
+                     yield return new WaitForSeconds(0.05f); // wait for 0.05 seconds
+                    player.transform.position = jumpingPos; // set the player's position to the jumpingPos
                 }
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.D) && (isClimbing || ableToClimb == true))
+            if (Input.GetKeyDown(KeyCode.D) && (isClimbing || ableToClimb == true)) // if the train is going fast
             {
-                StartCoroutine(TriedJump());
+                StartCoroutine(TriedJump()); // start the TriedJump coroutine
             }
         }
     }
-    IEnumerator TriedJump()
+    IEnumerator TriedJump() // sets triedJump to true for 2 seconds, then turns it back to false
     {
         triedJump = true;
         yield return new WaitForSeconds(2);
